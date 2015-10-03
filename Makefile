@@ -47,6 +47,7 @@ ft_lstdelone.c		\
 ft_lstadd.c			\
 ft_lstnew.c			\
 ft_lstsplit.c		\
+ft_lz_strsplit.c		\
 ft_memalloc.c		\
 ft_memccpy.c		\
 ft_memchr.c			\
@@ -63,6 +64,7 @@ ft_putnbr.c         \
 ft_putnbr_fd.c		\
 ft_putstr.c         \
 ft_putstr_fd.c		\
+ft_remove_useless.c	\
 ft_strcasestr.c		\
 ft_strcat.c			\
 ft_strchr.c			\
