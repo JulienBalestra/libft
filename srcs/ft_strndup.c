@@ -20,7 +20,7 @@ char		*ft_strndup(const char *s, size_t n)
 
 	if (!s && ft_strlen(s) > n)
 		return (NULL);
-	new_str = (char *)malloc(sizeof(char) * (n));
+	new_str = (char *)malloc(sizeof(char) * (n + 1));
 	if (new_str != NULL)
 	{
 		i = 0;
