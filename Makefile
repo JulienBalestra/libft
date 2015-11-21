@@ -95,7 +95,8 @@ ft_strstr.c			\
 ft_strsub.c			\
 ft_strtrim.c		\
 ft_tolower.c        \
-ft_toupper.c        
+ft_toupper.c        \
+get_next_line.c
 
 
 .PHONY: all clean fclean re
