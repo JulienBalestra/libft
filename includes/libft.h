@@ -13,6 +13,9 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <string.h>
+# define BUFF_SIZE      1024
+# define MAX_BUFF_SIZE  4096
+# define MAX_FD 2000
 
 void			ft_putchar(char c);
 void			ft_putchar_fd(char c, int fd);
@@ -89,9 +92,6 @@ t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void			ft_bubble_sort(char **av, int start, int ac);
 char			**ft_lz_strsplit(char *str, char c);
 char			*ft_remove_useless(char *str, char c);
-# define BUFF_SIZE      1024
-# define MAX_BUFF_SIZE  4096
-# define MAX_FD 2000
 int 			get_next_line(int const fd, char **line);
 
 #endif
