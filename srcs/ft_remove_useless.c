@@ -1,18 +1,10 @@
 #include "libft.h"
 #include <stdlib.h>
 
-
-// if c == " "
-// "  test  " -> "test"
-// "  one two  " -> "one two"
-// "  one two    three  " -> "one two    three"
-
-
 static char *get_new_string(char *old, int i, int s, int len)
 {
 	char *new_str;
-	
-	new_str = NULL;
+
 	if ((new_str = (char *)malloc(sizeof(char) * (len + 1))))
     	{
     		while (i < len)
@@ -33,8 +25,7 @@ char *ft_remove_useless(char *str, char c)
 	int e;
 	int i;
 
-	new_str = NULL;
-	len = ft_strlen(str);
+	len = (int) ft_strlen(str);
 	s = 0;
 	e = len;
 	i = 0;

@@ -16,8 +16,7 @@
 static char			*str_new(int neg, size_t size)
 {
 	char	*str;
-	
-	str = NULL;
+
 	if ((str = (char *)malloc(sizeof(char) * size + 1)))
 	{
 		if (neg)
@@ -35,18 +34,17 @@ char				*ft_itoa(int n)
 	int				i;
 	unsigned int	j;
 
-	str = NULL;
 	neg = 0;
 	if (n < 0)
 		neg = 1;
 	len = ft_nbrlen(n) + neg;
 	j = ft_absint(n);
-	if ((str = str_new(neg, len)))
+	if ((str = str_new(neg, (size_t) len)))
 	{		
 		i = len - 1;
 		while (i >= neg)
 		{
-			str[i] = (j % 10) + 48;
+			str[i] = (char) ((j % 10) + 48);
 			j = j / 10;
 			i--;
 		}		

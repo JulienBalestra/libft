@@ -4,7 +4,6 @@ static void	ft_swap_s(char **s1, char **s2)
 {
 	char	*tmp;
 
-	tmp = NULL;
 	tmp = *s1;
 	*s1 = *s2;
 	*s2 = tmp;

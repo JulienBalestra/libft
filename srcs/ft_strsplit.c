@@ -87,7 +87,7 @@ char		**ft_strsplit(char const *s, char c)
 	char	**split;
 	int		len;
 
-	len = ft_strlen(s);
+	len = (int) ft_strlen(s);
 	while ((s[len - 1] == c) && (len >= 0))
 		len--;
 	split = (char **)malloc(sizeof(char *) *

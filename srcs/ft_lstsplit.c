@@ -21,6 +21,7 @@ t_list		*ft_lstsplit(char **strsplit)
 	k = 0;
 	if (!strsplit[k])
 		return (NULL);
+	lstsplit = NULL;
 	while (strsplit[k] != NULL)
 	{
 		if (k == 0)

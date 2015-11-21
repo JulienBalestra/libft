@@ -18,7 +18,7 @@ char	*ft_strcpy(char *dest, const char *src)
 	int	len_dest;
 
 	i = 0;
-	len_dest = ft_strlen(dest);
+	len_dest = (int) ft_strlen(dest);
 	while ((i < len_dest) && (src[i] != '\0'))
 	{
 		dest[i] = src[i];

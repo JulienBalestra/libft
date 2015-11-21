@@ -19,12 +19,12 @@ char		*ft_strtrim(char const *s)
 	int		end;
 
 	start = 0;
-	end = ft_strlen(s) - 1;
+	end = (int) ft_strlen(s) - 1;
 	while (s[start] == ' ' || s[start] == '\t' || s[start] == '\n')
 		start++;
 	if (start == end + 1)
 		return (ft_strnew(0));
 	while (s[end] == ' ' || s[end] == '\t' || s[end] == '\n')
 		end--;
-	return (ft_strsub(s, start, end - start + 1));
+	return (ft_strsub(s, (unsigned int) start, (unsigned int)(end - start + 1)));
 }

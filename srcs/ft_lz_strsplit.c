@@ -21,7 +21,6 @@ static char *str_range_dup(char *str, int n)
 	char *new_str;
 	int i;
 
-	new_str = NULL;
 	i = 0;
 	if ((new_str = (char *)malloc(sizeof(char) * (n +1))))
 	{
@@ -67,10 +66,8 @@ char **ft_lz_strsplit(char *str, char c)
 	int i;
 	int range;
 
-	split = NULL;
 	nb_str = ft_count_string(str, c);
 	i = 0;
-	range = 0;
 	if ((split = (char **)malloc(sizeof(char *) * (nb_str + 1))))
 	{	
 		while (i < nb_str)

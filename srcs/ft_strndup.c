@@ -21,10 +21,10 @@ char		*ft_strndup(const char *s, size_t n)
 	if (!s && ft_strlen(s) > n)
 		return (NULL);
 	new_str = (char *)malloc(sizeof(char) * (n + 1));
-	if (new_str != NULL)
+	if (new_str != NULL && s)
 	{
 		i = 0;
-		while ((s[i] != '\0') && (i < n))
+		while (s[i] && (i < n))
 		{
 			new_str[i] = s[i];
 			i++;
