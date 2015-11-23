@@ -344,7 +344,7 @@ class TestLibAsserts(unittest.TestCase):
 		for args in [("1", "a", "0"), ("1", "a", "1"), ("1", "a", "2"), ("22", "b", "1"), ("b", "22", "1"),
 					 ("", "0", "1"), ("0", "", "1"), ("ccc", "333", "2"), ("ccc", "333", "8")]:
 			self.assertEqual(0, call([self.run, args[0], args[1], args[2]]))
-		# TODO valgrind
+			# TODO valgrind
 
 	def test_strndup(self):
 		for args in [("abc", "2", "ab"), ("abcd", "3", "abc"), ("abcd", "1", "a"), ("abcd", "8", "abcd")]:
