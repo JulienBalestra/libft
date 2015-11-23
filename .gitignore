@@ -1,2 +1,6 @@
+/.objects
+/.idea
 *.o
 *.a
+/tests/moulitest_log
+*.pyc
