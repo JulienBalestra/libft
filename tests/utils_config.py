@@ -62,9 +62,9 @@ def valgrind_wrapper(program, full_leaks=False):
 	if full_leaks is True:
 		valgrind = ["valgrind", "--leak-check=full"]
 
+	print program
 	program = valgrind + program
 	p_command = subprocess.Popen(program, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-	#p_command.stdout.close()
 	stdout, stderr = p_command.communicate()
 
 	summary = [leak.split("==    ")[1] for leak in stderr.split("\n") if "lost:" in leak]

@@ -33,7 +33,6 @@ class TestLibAsserts(unittest.TestCase):
 		self.assertEqual(1, call(self.run))
 
 	def tearDown(self):
-		self.waiting_process()
 		if self.debug_mod is False:
 			os.remove(self.run)
 
@@ -55,9 +54,9 @@ class TestLibAsserts(unittest.TestCase):
 			self.assertEqual(str(abs(number)), check_output([self.run, str(number)]))
 
 	def test_atoi(self):
-		for num in str(range(-11, 11)):
-			self.assertEqual(0, call([self.run, num]))
-		# self.valgrind([self.run, num])
+		for num in range(-11, 11):
+			self.assertEqual(0, call([self.run, "%s" % num]))
+			self.valgrind([self.run, "%s" % num])
 		for char_n_num in [" 11", "\t22", "\n33", "+44", " +55", "\t+66", "+77a7", " -99", "\t-111", "-222c2", "+-333",
 						   "-+444", "c1"]:
 			self.assertEqual(0, call([self.run, char_n_num]))
