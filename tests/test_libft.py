@@ -235,6 +235,13 @@ class TestLibAsserts(unittest.TestCase):
 			self.assertEqual(t[0], check_output([self.run, t[1], t[2], t[3]]))
 			self.valgrind([self.run, t[1], t[2], t[3]])
 
+	def test_str2defrag(self):
+		self.assertEqual("1234", check_output([self.run, "123", "4"]))
+		self.valgrind([self.run, "123", "4"])
+		for t in [("123", "1", "2", "3")]:
+			self.assertEqual(t[0], check_output([self.run, t[1], t[2], t[3]]))
+			self.valgrind([self.run, t[1], t[2], t[3]])
+
 	def test_str2del(self):
 		self.assertEqual(0, call([self.run, "123", "4"]))
 		self.valgrind([self.run, "123", "4"])

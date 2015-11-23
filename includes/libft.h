@@ -93,5 +93,6 @@ char            **ft_str2dup(char **array);
 size_t			ft_str2len(char **array);
 void			ft_str2del(char **array);
 size_t			ft_nstrlen(const char *s);
+void			ft_str2defrag(char **array, size_t origin_size);
 
 #endif
