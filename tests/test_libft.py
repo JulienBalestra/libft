@@ -58,11 +58,9 @@ class TestLibAsserts(unittest.TestCase):
 	def test_atoi(self):
 		for num in range(-11, 11):
 			self.assertEqual(0, call([self.run, "%s" % num]))
-			self.valgrind([self.run, "%s" % num])
 		for char_n_num in [" 11", "\t22", "\n33", "+44", " +55", "\t+66", "+77a7", " -99", "\t-111", "-222c2", "+-333",
 						   "-+444", "c1"]:
 			self.assertEqual(0, call([self.run, char_n_num]))
-			self.valgrind([self.run, char_n_num])
 
 	def test_bubble_sort(self):
 		for test in [("aa,zz,", [self.run, "zz", "aa"]),
@@ -223,6 +221,25 @@ class TestLibAsserts(unittest.TestCase):
 		for mystr in [("  one  ", "one"), ("one", "one"), ("  two  ", "two"), (" one  two ", "one  two")]:
 			self.assertEqual(mystr[1], check_output([self.run, mystr[0]]))
 			self.valgrind([self.run, mystr[0]])
+
+	def test_str2dup(self):
+		self.assertEqual("1234", check_output([self.run, "123", "4"]))
+		self.valgrind([self.run, "123", "4"])
+		for t in [("123", "1", "2", "3")]:
+			self.assertEqual(t[0], check_output([self.run, t[1], t[2], t[3]]))
+			self.valgrind([self.run, t[1], t[2], t[3]])
+
+	def test_str2del(self):
+		self.assertEqual(0, call([self.run, "123", "4"]))
+		self.valgrind([self.run, "123", "4"])
+		for t in [(0, "1", "2", "3")]:
+			self.assertEqual(t[0], call([self.run, t[1], t[2], t[3]]))
+			self.valgrind([self.run, t[1], t[2], t[3]])
+
+	def test_str2len(self):
+		self.assertEqual("3", check_output([self.run, "1", "2"]))
+		self.assertEqual("2", check_output([self.run, "1"]))
+		self.valgrind([self.run, "0", "1"])
 
 	def test_strcasestr(self):
 		for args in [("1", "a", "(null)"), ("22", "b", "(null)"), ("b", "22", "(null)"),
