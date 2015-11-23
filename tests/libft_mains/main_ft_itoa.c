@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 
+#include <stdlib.h>
 
 int     main(int ac, char **av)
 {
@@ -15,6 +16,7 @@ int     main(int ac, char **av)
         str1 = ft_itoa(i);
         if (strcmp(av[1], str1) != 0)
             return 2;
+        free(str1);
     }
     return 0;
 }

@@ -100,7 +100,8 @@ class TestLibAsserts(unittest.TestCase):
 
 	def test_itoa(self):
 		for char_int in [0, 1, 10, -5, 111, -22, 1000, 2 ** 31 - 1, -2 ** 31, -2 ** 31 + 1]:
-			self.assertEqual(0, call([self.run, str(char_int)]))
+			self.assertEqual(0, call([self.run, "%s" % char_int]))
+			self.valgrind([self.run, "%s" % char_int])
 
 	def test_lstiter(self):
 		self.assertEqual("12abc", check_output([self.run, "12", "abc"]))
@@ -174,11 +175,9 @@ class TestLibAsserts(unittest.TestCase):
 			self.assertEqual(args[2], check_output([self.run, args[0], args[1]]))
 
 	def test_nbrlen(self):
-		self.assertEqual("1", check_output([self.run, "0"]))
-		self.assertEqual("1", check_output([self.run, "1"]))
-		self.assertEqual("2", check_output([self.run, "10"]))
-		self.assertEqual("3", check_output([self.run, "101"]))
-		self.assertEqual("4", check_output([self.run, "1101"]))
+		for t in [("1", "0"), ("1", "1"), ("1", "9"), ("2", "10"), ("3", "110"), ("3", "111")]:
+			self.assertEqual(t[0], check_output([self.run, t[1]]))
+			self.valgrind([self.run, t[1]])
 
 	def test_putchar(self):
 		for my_str in ["test", "another test"]:
@@ -206,6 +205,7 @@ class TestLibAsserts(unittest.TestCase):
 		for num in [0, 1, 10, 11, 22, 111, -1, -10, -11, -2222, 2 ** 31 - 1, -2 ** 31, -2 ** 31 + 1]:
 			num = str(num)
 			self.assertEqual(num, check_output([self.run, num]))
+			self.valgrind([self.run, num])
 
 	def test_putstr(self):
 		for my_str in ["test", "another test"]:
@@ -294,7 +294,9 @@ class TestLibAsserts(unittest.TestCase):
 
 	def test_strlen(self):
 		self.assertEqual("3", check_output([self.run, "123"]))
+		self.valgrind([self.run, "123"])
 		self.assertEqual("0", check_output([self.run, ""]))
+		self.valgrind([self.run, ""])
 
 	def test_strmap(self):
 		for my_str in ["Test", "Another Test"]:
@@ -317,6 +319,7 @@ class TestLibAsserts(unittest.TestCase):
 		for args in [("aaa", "aaa", "2"), ("bb", "bbb", "3"), ("cccc", "ccc", "0"), ("abc", "cba", "3"),
 					 ("abc", "abcde", "3")]:
 			self.assertEqual(0, call([self.run, args[0], args[1], args[2]]))
+			self.valgrind([self.run, args[0], args[1], args[2]])
 
 	def test_strncpy(self):
 		for args in [("1", "a", "0"), ("1", "a", "1"), ("1", "a", "2"), ("22", "b", "1"), ("b", "22", "1"),
