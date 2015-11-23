@@ -179,6 +179,12 @@ class TestLibAsserts(unittest.TestCase):
 			self.assertEqual(t[0], check_output([self.run, t[1]]))
 			self.valgrind([self.run, t[1]])
 
+	def test_nstrlen(self):
+		self.assertEqual("3", check_output([self.run, "123"]))
+		self.valgrind([self.run, "123"])
+		self.assertEqual("0", check_output([self.run, ""]))
+		self.valgrind([self.run, ""])
+
 	def test_putchar(self):
 		for my_str in ["test", "another test"]:
 			self.assertEqual(my_str, check_output([self.run, my_str]))

@@ -92,5 +92,6 @@ char			*ft_remove_useless(char *str, char c);
 char            **ft_str2dup(char **array);
 size_t			ft_str2len(char **array);
 void			ft_str2del(char **array);
+size_t			ft_nstrlen(const char *s);
 
 #endif
