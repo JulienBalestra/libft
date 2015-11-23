@@ -1,6 +1,7 @@
 #include "libft.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 
 
 int	main(int ac, char **av)
@@ -15,6 +16,7 @@ int	main(int ac, char **av)
 		
 		str = ft_strndup(av[1], ft_atoi(av[2]));
 		printf("%s", str);
+		free(str);
 	}
 	return 0;
 }

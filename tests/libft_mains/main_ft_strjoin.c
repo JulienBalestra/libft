@@ -1,6 +1,7 @@
 #include "libft.h"
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 
 int     main(int ac, char **av)
@@ -24,6 +25,7 @@ int     main(int ac, char **av)
                 return 2;
             i++;
         }
+        free(str3);
     }
     return 0;
 }

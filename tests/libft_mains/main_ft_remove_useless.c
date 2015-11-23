@@ -1,5 +1,6 @@
 #include "libft.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int	main(int ac, char **av)
 {
@@ -19,6 +20,7 @@ int	main(int ac, char **av)
 			new_str = ft_remove_useless(av[i], ' ');
 			printf("%s", new_str);
 			i++;
+			free(new_str);
 		}
 	}
 	return 0;

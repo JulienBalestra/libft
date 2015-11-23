@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "libft.h"
 
 
@@ -19,8 +20,10 @@ int	main(int ac, char **av)
 			printf("%s", split[i]);
 			if (i < nb_string - 1)
 				printf(":");
+            free(split[i]);
 			i++;
 		}
+		free(split);
 	}
 	return 0;
 }

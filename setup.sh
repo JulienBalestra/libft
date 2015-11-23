@@ -24,6 +24,24 @@ function config_moulitest
 
 }
 
+function packages
+{
+    valgrind --version
+    if [ $? -eq 0 ]
+    then
+        echo "valgrind already setup"
+        return 0
+    fi
+    echo "Updating package source..."
+    sudo apt-get update -qq || sudo brew update > /dev/null
+    for package in valgrind
+    do
+        echo "Installing package named ${package}"
+        sudo apt-get install ${package} -y > /dev/null || sudo brew install ${package} > /dev/null
+        which ${package}
+    done
+}
+
 function setup_submodules
 {
     printf "\nSetup git submodules...\n"
@@ -42,6 +60,7 @@ function main
     path=$(pwd)
     setup_submodules
     config_moulitest
+    packages
     return $?
 }
 

@@ -26,9 +26,9 @@ int	main(int ac, char **av)
 				free(str1);
 				free(str2);
 				return 2;
+			}
 			free(str1);
             free(str2);
-			}
 		}
 	}
 	return 0;
