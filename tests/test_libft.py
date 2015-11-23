@@ -338,7 +338,9 @@ class TestLibAsserts(unittest.TestCase):
 			self.assertEqual(0, call([self.run, args[0], args[1], args[2], args[3]]))
 
 	def test_strnew(self):
-		self.assertEqual(0, call([self.run, "3", "123"]))
+		for t in [("3", "123"), ("1", "1"), ("10", "1234567890")]:
+			self.assertEqual(0, call([self.run, t[0], t[1]]))
+			self.valgrind([self.run, t[0], t[1]])
 
 	def test_strnstr(self):
 		for args in [("1", "a", "1", "(null)"), ("22", "b", "2", "(null)"),
