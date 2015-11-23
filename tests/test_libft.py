@@ -13,7 +13,7 @@ class TestLibAsserts(unittest.TestCase):
 	dev_null = open(os.devnull, 'w')
 	valgrind_binary = True
 	queue = QueueProcess
-	tail = True  # if "TRUE" in "%s" % os.getenv("VG_TAIL") else False
+	tail = True  if "TRUE" in "%s" % os.getenv("VG_TAIL") else False
 
 	@classmethod
 	def setUpClass(cls):
@@ -33,6 +33,8 @@ class TestLibAsserts(unittest.TestCase):
 		self.assertEqual(1, call(self.run))
 
 	def tearDown(self):
+		if self.tail is False:
+			self.waiting_process()
 		if self.debug_mod is False:
 			os.remove(self.run)
 
