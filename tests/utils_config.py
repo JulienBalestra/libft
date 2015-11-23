@@ -62,7 +62,6 @@ def valgrind_wrapper(program, full_leaks=False):
 	if full_leaks is True:
 		valgrind = ["valgrind", "--leak-check=full"]
 
-	print program
 	program = valgrind + program
 	p_command = subprocess.Popen(program, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	stdout, stderr = p_command.communicate()
