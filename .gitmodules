@@ -1,0 +1,3 @@
+[submodule "tests/moulitest"]
+	path = tests/moulitest
+	url = https://github.com/JulienBalestra/moulitest.git
