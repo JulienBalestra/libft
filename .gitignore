@@ -2,5 +2,6 @@
 /.idea
 *.o
 *.a
-/tests/moulitest_log
+moulitest_log
 *.pyc
+*.xml
