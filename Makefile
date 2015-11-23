@@ -65,6 +65,9 @@ ft_putnbr_fd.c		\
 ft_putstr.c         \
 ft_putstr_fd.c		\
 ft_remove_useless.c	\
+ft_str2dup.c        \
+ft_str2del.c        \
+ft_str2len.c        \
 ft_strcasestr.c		\
 ft_strcat.c			\
 ft_strchr.c			\
