@@ -13,10 +13,11 @@ class TestLibAsserts(unittest.TestCase):
 	dev_null = open(os.devnull, 'w')
 	valgrind_binary = True
 	queue = QueueProcess
-	tail = True  if "TRUE" in "%s" % os.getenv("VG_TAIL") else False
+	tail = True if "TRUE" in "%s" % os.getenv("VG_TAIL") else False
 
 	@classmethod
 	def setUpClass(cls):
+		os.write(1, "[Step1]\n")
 		assert cls.lib_ft_progress.full_coverage() is True
 		if call(["make", "re", "-C", cls.context, "-j"], stdout=cls.dev_null) == 0:
 			pass
@@ -27,6 +28,10 @@ class TestLibAsserts(unittest.TestCase):
 		cls.set_config = SetLibftConfig(cls.debug_mod)
 		cls.test_methods = iter(IterMethods(cls))
 		cls.ascii_printable = string.printable
+
+	@classmethod
+	def tearDownClass(cls):
+		os.write(1, "\n[/Step1]\n")
 
 	def setUp(self):
 		self.run = self.set_config.next_conf(self.test_methods.next())
@@ -101,7 +106,6 @@ class TestLibAsserts(unittest.TestCase):
 	def test_itoa(self):
 		for char_int in [0, 1, 10, -5, 111, -22, 1000, 2 ** 31 - 1, -2 ** 31, -2 ** 31 + 1]:
 			self.assertEqual(0, call([self.run, "%s" % char_int]))
-			self.valgrind([self.run, "%s" % char_int])
 
 	def test_lstiter(self):
 		self.assertEqual("12abc", check_output([self.run, "12", "abc"]))
@@ -177,13 +181,10 @@ class TestLibAsserts(unittest.TestCase):
 	def test_nbrlen(self):
 		for t in [("1", "0"), ("1", "1"), ("1", "9"), ("2", "10"), ("3", "110"), ("3", "111")]:
 			self.assertEqual(t[0], check_output([self.run, t[1]]))
-			self.valgrind([self.run, t[1]])
 
 	def test_nstrlen(self):
 		self.assertEqual("3", check_output([self.run, "123"]))
-		self.valgrind([self.run, "123"])
 		self.assertEqual("0", check_output([self.run, ""]))
-		self.valgrind([self.run, ""])
 
 	def test_putchar(self):
 		for my_str in ["test", "another test"]:
@@ -205,23 +206,19 @@ class TestLibAsserts(unittest.TestCase):
 		for num in [0, 1, 10, 11, 22, 111, -1, -10, -11, -2222, 2 ** 31 - 1, -2 ** 31, -2 ** 31 + 1]:
 			num = str(num)
 			self.assertEqual(num, check_output([self.run, num]))
-			self.valgrind([self.run, num])
 
 	def test_putnbr_fd(self):
 		for num in [0, 1, 10, 11, 22, 111, -1, -10, -11, -2222, 2 ** 31 - 1, -2 ** 31, -2 ** 31 + 1]:
 			num = str(num)
 			self.assertEqual(num, check_output([self.run, num]))
-			self.valgrind([self.run, num])
 
 	def test_putstr(self):
 		for my_str in ["test", "another test"]:
 			self.assertEqual(my_str, check_output([self.run, my_str]))
-			self.valgrind([self.run, my_str])
 
 	def test_putstr_fd(self):
 		for my_str in ["test", "another test"]:
 			self.assertEqual(my_str, check_output([self.run, my_str]))
-			self.valgrind([self.run, my_str])
 
 	def test_remove_useless(self):
 		for mystr in [("  one  ", "one"), ("one", "one"), ("  two  ", "two"), (" one  two ", "one  two")]:
@@ -263,17 +260,13 @@ class TestLibAsserts(unittest.TestCase):
 
 	def test_strcat(self):
 		for args in [("1", "a"), ("22", "b"), ("b", "22"), ("", "0"), ("0", "")]:
-			try:
-				self.assertEqual(0, call([self.run, args[0], args[1]]))
-			# TODO valgrind
-			except AssertionError:
-				self.assertEqual(-6, call([self.run, args[0], args[1]]))
+			self.assertEqual(0, call([self.run, args[0], args[1]]))
+			self.valgrind([self.run, args[0], args[1]])
 
 	def test_strchr(self):
 		for args in [("1", "a", "(null)=(null)"), ("22", "b", "(null)=(null)"), ("b", "c", "(null)=(null)"),
 					 ("aaabcc", "b", "bcc=bcc"), ("abc", "c", "c=c"), ("ABC", "A", "ABC=ABC")]:
 			self.assertEqual(args[2], check_output([self.run, args[0], args[1]]))
-			self.valgrind([self.run, args[0], args[1]])
 
 	def test_strclr(self):
 		for my_str in ["test", "another test"]:
@@ -283,15 +276,11 @@ class TestLibAsserts(unittest.TestCase):
 	def test_strcmp(self):
 		for args in [("aaa", "aaa"), ("bb", "bbb"), ("cccc", "ccc"), ("abc", "cba")]:
 			self.assertEqual(0, call([self.run, args[0], args[1]]))
-			self.valgrind([self.run, args[0], args[1]])
 
 	def test_strcpy(self):
 		for args in [("1", "a"), ("22", "b"), ("b", "22"), ("", "0"), ("0", "")]:
-			try:
-				self.assertEqual(0, call([self.run, args[0], args[1]]))
-			# TODO valgrind
-			except AssertionError:
-				self.assertEqual(-6, call([self.run, args[0], args[1]]))
+			self.valgrind([self.run, args[0], args[1]])
+			self.assertEqual(0, call([self.run, args[0], args[1]]))
 
 	def test_strdel(self):
 		self.assertEqual(0, call([self.run, "3", "123"]))
@@ -326,9 +315,7 @@ class TestLibAsserts(unittest.TestCase):
 
 	def test_strlen(self):
 		self.assertEqual("3", check_output([self.run, "123"]))
-		self.valgrind([self.run, "123"])
 		self.assertEqual("0", check_output([self.run, ""]))
-		self.valgrind([self.run, ""])
 
 	def test_strmap(self):
 		for my_str in ["Test", "Another Test"]:
@@ -350,8 +337,8 @@ class TestLibAsserts(unittest.TestCase):
 	def test_strncmp(self):
 		for args in [("aaa", "aaa", "2"), ("bb", "bbb", "3"), ("cccc", "ccc", "0"), ("abc", "cba", "3"),
 					 ("abc", "abcde", "3")]:
-			self.assertEqual(0, call([self.run, args[0], args[1], args[2]]))
 			self.valgrind([self.run, args[0], args[1], args[2]])
+			self.assertEqual(0, call([self.run, args[0], args[1], args[2]]))
 
 	def test_strncpy(self):
 		for args in [("1", "a", "0"), ("1", "a", "1"), ("1", "a", "2"), ("22", "b", "1"), ("b", "22", "1"),

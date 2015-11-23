@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
 char		*ft_strcat(char *dest, const char *src)
 {
 	char	*new_str;
@@ -19,10 +17,12 @@ char		*ft_strcat(char *dest, const char *src)
 	new_str = dest;
 	while (*dest)
 		dest++;
-	while ((*dest = *src))
+	while (*src)
 	{
+		*dest = *src;
 		dest++;
 		src++;
 	}
+	*dest = '\0';
 	return (new_str);
 }
