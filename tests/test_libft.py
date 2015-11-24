@@ -11,11 +11,10 @@ class TestLibAsserts(unittest.TestCase):
 	debug_mod = False
 	lib_ft_progress = Progress("libft")
 	dev_null = open(os.devnull, 'w')
-	valgrind_binary = True
+	valgrind_binary = False
 
 	@classmethod
 	def setUpClass(cls):
-		os.write(1, "[Step1]\n")
 		assert cls.lib_ft_progress.full_coverage() is True
 		if call(["make", "re", "-C", cls.context, "-j"], stdout=cls.dev_null) == 0:
 			pass
@@ -26,10 +25,18 @@ class TestLibAsserts(unittest.TestCase):
 		cls.set_config = SetLibftConfig(cls.debug_mod)
 		cls.test_methods = iter(IterMethods(cls))
 		cls.ascii_printable = string.printable
+		try:
+			if call(["valgrind", "--version"]) == 0:
+				cls.valgrind_binary = True
+			else:
+				os.write(2, "VALGRIND NOT AVAILABLE")
+		except OSError:
+			pass
 
 	@classmethod
 	def tearDownClass(cls):
-		os.write(1, "\n[/Step1]\n")
+		os.write(1, "\n")
+		cls.dev_null.close()
 
 	def setUp(self):
 		self.run = self.set_config.next_conf(self.test_methods.next())
@@ -331,7 +338,7 @@ class TestLibAsserts(unittest.TestCase):
 		for args in [("1", "a", "0"), ("1", "a", "1"), ("1", "a", "2"), ("22", "b", "1"), ("b", "22", "1"),
 					 ("", "0", "1"), ("0", "", "1"), ("ccc", "333", "2"), ("ccc", "333", "8")]:
 			self.assertEqual(0, call([self.run, args[0], args[1], args[2]]))
-			# TODO valgrind
+		# TODO valgrind
 
 	def test_strndup(self):
 		for args in [("abc", "2", "ab"), ("abcd", "3", "abc"), ("abcd", "1", "a"), ("abcd", "8", "abcd")]:
