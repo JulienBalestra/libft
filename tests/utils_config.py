@@ -82,29 +82,3 @@ def valgrind_wrapper(program, full_leaks=False):
 		raise AssertionError("%s" % summary)
 	return False
 
-
-class QueueProcess:
-	p = []
-	cores = cpu_count() + 1
-	join_number = (cores / 2) + 1
-
-	def __init__(self, function, tail, *args):
-		self.args = args
-		self.function = function
-		self.tail = tail
-		self.process = Process(target=self.function, args=self.args)
-
-	def start(self):
-		self.manage_queue()
-		self.process.start()
-		if self.tail is True:
-			self.process.join()
-			if self.process.exitcode != 0:
-				raise AssertionError
-		self.p.append(self)
-
-	def manage_queue(self):
-		state = [p for p in self.p if p.process.is_alive()]
-		if len(state) > self.cores:
-			for i in range(0, self.join_number):
-				state[i].process.join()

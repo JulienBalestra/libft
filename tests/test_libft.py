@@ -3,7 +3,7 @@ from subprocess import call, check_output
 import os
 import string
 from libft_progess import Progress
-from utils_config import SetLibftConfig, IterMethods, QueueProcess, valgrind_wrapper
+from utils_config import SetLibftConfig, IterMethods, valgrind_wrapper
 
 
 class TestLibAsserts(unittest.TestCase):
@@ -12,8 +12,6 @@ class TestLibAsserts(unittest.TestCase):
 	lib_ft_progress = Progress("libft")
 	dev_null = open(os.devnull, 'w')
 	valgrind_binary = True
-	queue = QueueProcess
-	tail = True if "TRUE" in "%s" % os.getenv("VG_TAIL") else False
 
 	@classmethod
 	def setUpClass(cls):
@@ -38,23 +36,12 @@ class TestLibAsserts(unittest.TestCase):
 		self.assertEqual(1, call(self.run))
 
 	def tearDown(self):
-		if self.tail is False:
-			self.waiting_process()
 		if self.debug_mod is False:
 			os.remove(self.run)
 
 	def valgrind(self, command):
 		if self.valgrind_binary is True:
-			leaks = QueueProcess(valgrind_wrapper, self.tail, command)
-			leaks.start()
-
-	def waiting_process(self):
-		raising = []
-		for p in self.queue.p:
-			p.process.join()
-			if p.process.exitcode != 0:
-				raising.append(p.args)
-		self.assertEqual([], raising)
+			valgrind_wrapper(command)
 
 	def test_absint(self):
 		for number in [-5, 6, 2 ** 31 - 1, -2 ** 31, -2 ** 31 + 1]:
