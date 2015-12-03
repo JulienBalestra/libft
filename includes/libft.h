@@ -6,7 +6,7 @@
 /*   By: jubalest <jubalest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/20 11:26:39 by jubalest          #+#    #+#             */
-/*   Updated: 2015/05/13 13:53:26 by jubalest         ###   ########.fr       */
+/*   Updated: 2015/12/03 16:52:14 by jubalest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void			ft_bubble_sort(char **av, int start, int ac);
 char			**ft_lz_strsplit(char *str, char c);
 char			*ft_remove_useless(char *str, char c);
-char            **ft_str2dup(char **array);
+char			**ft_str2dup(char **array);
 size_t			ft_str2len(char **array);
 void			ft_str2del(char **array);
 size_t			ft_nstrlen(const char *s);
