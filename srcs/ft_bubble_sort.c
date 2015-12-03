@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_bubble_sort.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jubalest <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/03 16:34:44 by jubalest          #+#    #+#             */
+/*   Updated: 2015/12/03 16:34:45 by jubalest         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static void	ft_swap_s(char **s1, char **s2)
+void		ft_swap_s(char **s1, char **s2)
 {
 	char	*tmp;
 
@@ -11,8 +23,8 @@ static void	ft_swap_s(char **s1, char **s2)
 
 void		ft_bubble_sort(char **av, int start, int ac)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = start;
 	while (i < ac)

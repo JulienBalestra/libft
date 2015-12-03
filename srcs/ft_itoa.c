@@ -39,15 +39,15 @@ char				*ft_itoa(int n)
 		neg = 1;
 	len = ft_nbrlen(n) + neg;
 	j = ft_absint(n);
-	if ((str = str_new(neg, (size_t) len)))
-	{		
+	if ((str = str_new(neg, (size_t)len)))
+	{
 		i = len - 1;
 		while (i >= neg)
 		{
-			str[i] = (char) ((j % 10) + 48);
+			str[i] = (char)((j % 10) + 48);
 			j = j / 10;
 			i--;
-		}		
+		}
 	}
 	return (str);
 }

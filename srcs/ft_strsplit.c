@@ -34,7 +34,7 @@ static int	ft_nb_string(char const *s, char sep, int len)
 	return (nb_sep);
 }
 
-static char *ft_strnew_n_to_i_alloc(char const *s, int n, int i)
+static char	*ft_strnew_n_to_i_alloc(char const *s, int n, int i)
 {
 	char	*str;
 	int		k;
@@ -87,7 +87,7 @@ char		**ft_strsplit(char const *s, char c)
 	char	**split;
 	int		len;
 
-	len = (int) ft_strlen(s);
+	len = (int)ft_strlen(s);
 	while ((s[len - 1] == c) && (len >= 0))
 		len--;
 	split = (char **)malloc(sizeof(char *) *

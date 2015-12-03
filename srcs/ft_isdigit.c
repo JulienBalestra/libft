@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jubalest <jubalest@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/02/20 11:16:12 by jubalest          #+#    #+#             */
-/*   Updated: 2015/02/20 11:16:14 by jubalest         ###   ########.fr       */
+/*   Created: 2015/02/20 11:12:58 by jubalest          #+#    #+#             */
+/*   Updated: 2015/02/20 11:13:10 by jubalest         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int		ft_isdigit(int c)
 {
 	if (c > 47 && c < 58)
-		return (2048);
+		return (1);
 	else
 		return (0);
 }

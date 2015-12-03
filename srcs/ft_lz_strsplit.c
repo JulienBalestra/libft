@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lz_strsplit.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jubalest <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2015/12/03 16:41:08 by jubalest          #+#    #+#             */
+/*   Updated: 2015/12/03 16:41:09 by jubalest         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 
 static int	ft_count_string(char *str, char c)
 {
-	int i;
-	int n;
-	
+	int	i;
+	int	n;
+
 	i = 0;
 	n = 0;
 	while (str[i])
@@ -16,26 +28,26 @@ static int	ft_count_string(char *str, char c)
 	return (++n);
 }
 
-static char *str_range_dup(char *str, int n)
+static char	*str_range_dup(char *str, int n)
 {
-	char *new_str;
-	int i;
+	char	*new_str;
+	int		i;
 
 	i = 0;
-	if ((new_str = (char *)malloc(sizeof(char) * (n +1))))
+	if ((new_str = (char *)malloc(sizeof(char) * (n + 1))))
 	{
 		while (i < n)
 		{
 			new_str[i] = str[i];
-			i++;			
+			i++;
 		}
-		new_str[i] = '\0';		
+		new_str[i] = '\0';
 	}
 	return (new_str);
 }
 
-static char *move_into_substring(char *str, char c, int match)
-{	
+static char	*move_into_substring(char *str, char c, int match)
+{
 	if (match)
 	{
 		while (*str == c)
@@ -49,7 +61,7 @@ static char *move_into_substring(char *str, char c, int match)
 	return (str);
 }
 
-static int get_next_sep(char *str, char c)
+static int	get_next_sep(char *str, char c)
 {
 	int i;
 
@@ -59,17 +71,17 @@ static int get_next_sep(char *str, char c)
 	return (i);
 }
 
-char **ft_lz_strsplit(char *str, char c)
+char		**ft_lz_strsplit(char *str, char c)
 {
-	char **split;
-	int nb_str;
-	int i;
-	int range;
+	char	**split;
+	int		nb_str;
+	int		i;
+	int		range;
 
 	nb_str = ft_count_string(str, c);
 	i = 0;
 	if ((split = (char **)malloc(sizeof(char *) * (nb_str + 1))))
-	{	
+	{
 		while (i < nb_str)
 		{
 			if (i != 0)
@@ -81,5 +93,5 @@ char **ft_lz_strsplit(char *str, char c)
 		}
 		split[nb_str] = NULL;
 	}
-	return (split);	
+	return (split);
 }
