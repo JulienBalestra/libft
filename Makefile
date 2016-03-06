@@ -48,6 +48,7 @@ ft_lstadd.c			\
 ft_lstnew.c			\
 ft_lstsplit.c		\
 ft_lz_strsplit.c		\
+ft_esc_strsplit.c		\
 ft_memalloc.c		\
 ft_memccpy.c		\
 ft_memchr.c			\

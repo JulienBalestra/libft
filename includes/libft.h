@@ -88,6 +88,7 @@ void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 void			ft_bubble_sort(char **av, int start, int ac);
 char			**ft_lz_strsplit(char *str, char c);
+char			**ft_esc_strsplit(char *str, char c, char esc);
 char			*ft_remove_useless(char *str, char c);
 char			**ft_str2dup(char **array);
 size_t			ft_str2len(char **array);

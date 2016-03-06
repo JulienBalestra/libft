@@ -138,6 +138,19 @@ class TestLibAsserts(unittest.TestCase):
 			self.assertEqual(args[3], check_output([self.run, args[0], args[1], args[2]]))
 			self.valgrind([self.run, args[0], args[1], args[2]])
 
+	def test_esc_strsplit(self):
+		for args in [
+			("hi blank here", " ", "3", "hi:blank:here"),
+			("hi \"escape blank\" here", " ", "3", 'hi:"escape blank":here'),
+			("hi \"escape blank blank\" here \"noblankhere\"", " ", "3", 'hi:"escape blank blank":here"noblankhere"'),
+			("\"escape blank blank\"", " ", "1", '"escape blank blank"'),
+			("\"escape  blank\"", " ", "1", '"escape  blank"'),
+			("\"escape       blank\" end", " ", "2", '"escape       blank":end'),
+			("\"\"", " ", "1", '""')
+		]:
+			self.assertEqual(args[3], check_output([self.run, args[0], args[1], args[2]]))
+			self.valgrind([self.run, args[0], args[1], args[2]])
+
 	def test_memalloc(self):
 		self.assertEqual(0, call([self.run, "2"]))
 
@@ -430,7 +443,7 @@ class TestMouliTest(unittest.TestCase):
 	@staticmethod
 	def build_moulitest(output_file):
 		output = check_output(
-			["make", "-C", TestMouliTest.moulitest_dir, "libft_bonus"])
+				["make", "-C", TestMouliTest.moulitest_dir, "libft_bonus"])
 		output = output.split("[36;1m-------STARTING ALL UNIT TESTS-------\x1b[0m ]\n")[1]
 		output = output.split("\n[ \x1b[36;1m----------END OF UNIT TESTS----------\x1b[0m ]")[0]
 		with open(output_file, 'w') as log_file:
