@@ -39,7 +39,9 @@ class TestLibAsserts(unittest.TestCase):
 		cls.dev_null.close()
 
 	def setUp(self):
-		self.run = self.set_config.next_conf(self.test_methods.next())
+		m = self.test_methods.next()
+		print m
+		self.run = self.set_config.next_conf(m)
 		self.assertEqual(1, call(self.run))
 
 	def tearDown(self):
