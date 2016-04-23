@@ -40,7 +40,8 @@ class TestLibAsserts(unittest.TestCase):
 
 	def setUp(self):
 		m = self.test_methods.next()
-		print m
+		if self.debug_mod:
+			print m
 		self.run = self.set_config.next_conf(m)
 		self.assertEqual(1, call(self.run))
 
